@@ -4,8 +4,7 @@ namespace SimpleBanking.Infra.Database
 {
     public class DDL
     {
-        private static readonly IDatabaseConnection databaseConnection;
-        public static void Execute()
+        public static void Execute(IDatabaseConnection databaseConnection)
         {
             databaseConnection.Open();
             var sql = "";

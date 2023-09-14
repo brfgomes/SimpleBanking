@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../buildMultiTargeting/SimpleBanking.props" />
+  <Import Project="..\buildMultiTargeting\SimpleBanking.props" />
 </Project>

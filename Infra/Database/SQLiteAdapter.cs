@@ -37,7 +37,7 @@ namespace SimpleBanking.Infra.Database
                 {
                     foreach (var parameter in parameters)
                     {
-                        SQLCommand.Parameters.Add(parameter.Key, (DbType)parameter.Value);
+                        SQLCommand.Parameters.AddWithValue(parameter.Key, parameter.Value);
                     }
                 }
 
@@ -62,7 +62,7 @@ namespace SimpleBanking.Infra.Database
                 {
                     foreach (var parameter in parameters)
                     {
-                        SQLCommand.Parameters.Add(parameter.Key, (DbType)parameter.Value);
+                        SQLCommand.Parameters.AddWithValue(parameter.Key, parameter.Value);
                     }
                 }
 

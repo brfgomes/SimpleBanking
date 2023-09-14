@@ -3,6 +3,6 @@ namespace SimpleBanking.Domain
     public enum EUserType
     {
         Common = 0,
-        Selle = 1
+        Seller = 1
     }
 }

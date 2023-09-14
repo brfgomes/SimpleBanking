@@ -5,7 +5,8 @@ namespace SimpleBanking.Aplication
     public class ExecuteDDL
     {
         public static void Execute(){
-            DDL.Execute();
+            var databaseConnection = new SQLiteAdapter();
+            DDL.Execute(databaseConnection);
         }
     }
 }

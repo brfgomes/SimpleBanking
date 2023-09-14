@@ -8,6 +8,6 @@ namespace SimpleBanking.Aplication
         string email,
         string password,
         decimal wallet,
-        EUserType type
+        int type
     );
 }

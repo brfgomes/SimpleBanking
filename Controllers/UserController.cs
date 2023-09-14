@@ -19,11 +19,17 @@ namespace SimpleBanking.Controllers
         [HttpPost("Create")]
         public ActionResult Post([FromBody] CreateUserRequest user)
         {   
-            var useCaseCreateUser = CreateUser.Execute(user);
-            if(useCaseCreateUser == false)
-                return BadRequest("Erro ao criar usuário!");
+            var result = CreateUser.Execute(user);
+            if(result.Success == false)
+                return BadRequest(result.Message);
 
-            return Ok("Usuário criado com sucesso!");
+            return Ok(result.Message);
+        }
+
+        [HttpPost("List")]
+        public ActionResult Get()
+        {   
+        return Ok(ListUsers.Execute());
         }
     }
 }

@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/leandro/dev/SimpleBanking/SimpleBanking.csproj": {}
+    "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {}
   },
   "projects": {
-    "/home/leandro/dev/SimpleBanking/SimpleBanking.csproj": {
+    "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/leandro/dev/SimpleBanking/SimpleBanking.csproj",
+        "projectUniqueName": "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
         "projectName": "SimpleBanking",
-        "projectPath": "/home/leandro/dev/SimpleBanking/SimpleBanking.csproj",
-        "packagesPath": "/home/leandro/.nuget/packages/",
-        "outputPath": "/home/leandro/dev/SimpleBanking/obj/",
+        "projectPath": "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
+        "packagesPath": "C:\\Users\\dev1\\.nuget\\packages\\",
+        "outputPath": "d:\\Dev\\backend\\SimpleBanking\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/leandro/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\dev1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -70,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
