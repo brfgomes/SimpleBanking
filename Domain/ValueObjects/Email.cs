@@ -2,20 +2,20 @@ namespace SimpleBanking.Domain
 {
     public class Email
     {
-        public Email(string addres)
+        public Email(string address)
         {
-            Addres = addres;
+            Address = address;
 
-            if(addres == "")
+            if(address == "")
             {
                 throw new Exception("E-mail não informado");
             }
 
-            if (!addres.Contains('@') || !addres.Contains('.') || addres.Length < 8){
+            if (!address.Contains('@') || !address.Contains('.') || address.Length < 8){
                 throw new Exception("E-mail inválido");
             }
         }
 
-        public string Addres { get; private set; }
+        public string Address { get; private set; }
     }
 }

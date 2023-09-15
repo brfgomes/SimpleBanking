@@ -11,13 +11,12 @@ namespace SimpleBanking.Infra.Database
 
             sql = """
             CREATE TABLE IF NOT EXISTS users(
-            id varchar NOT NULL,
+            id uuid NOT NULL,
             name varchar(100) NOT NULL,
             document varchar(11) NOT NULL,
             email varchar(50) NOT NULL,
             password varchar(50) NOT NULL,
             type int(1) NOT NULL,
-            wallet varchar NOT NULL,
             PRIMARY KEY (id)
             );
             """;
@@ -25,17 +24,17 @@ namespace SimpleBanking.Infra.Database
 
             sql = """
             CREATE TABLE IF NOT EXISTS wallets(
-            id varchar NOT NULL,
+            userid uuid NOT NULL,
             balance decimal NOT NULL,
-            last_transaction_date datetime,
-            PRIMARY KEY (id)
+            lasttransactiondate datetime,
+            PRIMARY KEY (userid)
             );
             """;
             databaseConnection.Command(sql);
 
             sql = """
             CREATE TABLE IF NOT EXISTS transactions(
-            id varchar NOT NULL,
+            id uuid NOT NULL,
             value decimal NOT NULL,
             sender varchar NOT NULL,
             receiver varchar NOT NULL

@@ -1,6 +1,6 @@
 namespace SimpleBanking.Aplication
 {
-    public record CreateTrasctionRequest(
+    public record CreateTransactionRequest(
         decimal value,
         string userSenderId,
         string userReceiverId

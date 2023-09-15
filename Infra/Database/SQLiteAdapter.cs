@@ -7,19 +7,22 @@ namespace SimpleBanking.Infra.Database
 {
     public class SQLiteAdapter : IDatabaseConnection
     {
-        public SQLiteAdapter(){
-            var path = $"{ AppDomain.CurrentDomain.BaseDirectory}/database";
+        public SQLiteAdapter()
+        {
+            var path = $"{ AppDomain.CurrentDomain.BaseDirectory}/database.db";
             var ConnectionString = $"Data Source={path};Version=3;";
             _connection = new SQLiteConnection(ConnectionString);
         }
         
         private readonly SQLiteConnection _connection;
         
-        public void Open(){
+        public void Open()
+        {
             if(_connection.State == ConnectionState.Closed)
                 _connection.Open();
         }
-        public void Close(){
+        public void Close()
+        {
             if(_connection.State == ConnectionState.Open)
                 _connection.Close();
         }

@@ -2,14 +2,13 @@ namespace SimpleBanking.Domain
 {
     public class User : Entity
     {
-        public User(string name, Document document, Email email, Password password, EUserType type, Wallet wallet)
+        public User(string name, Document document, Email email, Password password, EUserType type)
         {
             Name = name;
             Document = document;
             Email = email;
             Password = password;
             Type = type;
-            Wallet = wallet;
 
             if(name == "")
             {
@@ -26,6 +25,5 @@ namespace SimpleBanking.Domain
         public Email Email { get; private set; }
         public Password Password { get; private set; }
         public EUserType Type { get; private set; }
-        public Wallet Wallet { get; private set; }
     }
 }

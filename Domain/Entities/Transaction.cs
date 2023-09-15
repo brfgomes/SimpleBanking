@@ -18,10 +18,10 @@ namespace SimpleBanking.Domain
                 throw new Exception("Usuários não informados");
             }
 
-            if(value < sender.Wallet.Balance)
-            {
-                throw new Exception("Saldo insuficiente");
-            }
+            // if(value < sender.Wallet.Balance)
+            // {
+            //     throw new Exception("Saldo insuficiente");
+            // }
 
         }
 
