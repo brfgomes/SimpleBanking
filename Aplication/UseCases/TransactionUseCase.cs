@@ -22,20 +22,31 @@ namespace SimpleBanking.Aplication
 
             if (sendler.Type == Domain.EUserType.Seller)
             {
-                return new GenericResponse(false, "Lojistas n�o podem enviar transfer�ncias!");
+                return new GenericResponse(false, "Lojistas nao podem enviar transferencias!");
             }
 
             var sendlerWallet = _walletRepository.GetWalletByUserId(sendler.Id);
+            var receiverWallet = _walletRepository.GetWalletByUserId(receiver.Id);
 
-            if(sendlerWallet.Balance < transaction.value)
+            if(transaction.value < 0)
             {
-                return new GenericResponse(false, "Saldo do insuficiente!");
+                return new GenericResponse(false, "Saldo inválido!");
+            }
+
+            if (sendlerWallet.Balance < transaction.value)
+            {
+                return new GenericResponse(false, "Saldo insuficiente!");
             }
 
             var newTransaction = new Domain.Transaction(transaction.value, sendler, receiver);
             _transactionRepository.Insert(newTransaction);
 
             //retirar da Wallet no banco o valor transferido
+            var newBalanceSendler = sendlerWallet.Balance - transaction.value;
+            var newBalanceReceiver = receiverWallet.Balance + transaction.value;
+
+            _walletRepository.UpadateBalance(sendler.Id, newBalanceSendler);
+            _walletRepository.UpadateBalance(receiver.Id, newBalanceReceiver);
 
             return new GenericResponse(true, "Tranferencia enviada com sucesso!");
         }

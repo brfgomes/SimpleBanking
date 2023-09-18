@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {}
+    "C:\\Main\\Dev\\SimpleBanking\\SimpleBanking.csproj": {}
   },
   "projects": {
-    "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {
+    "C:\\Main\\Dev\\SimpleBanking\\SimpleBanking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
+        "projectUniqueName": "C:\\Main\\Dev\\SimpleBanking\\SimpleBanking.csproj",
         "projectName": "SimpleBanking",
-        "projectPath": "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
-        "packagesPath": "C:\\Users\\dev1\\.nuget\\packages\\",
-        "outputPath": "d:\\Dev\\backend\\SimpleBanking\\obj\\",
+        "projectPath": "C:\\Main\\Dev\\SimpleBanking\\SimpleBanking.csproj",
+        "packagesPath": "C:\\Users\\Bruno\\.nuget\\packages\\",
+        "outputPath": "C:\\Main\\Dev\\SimpleBanking\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\dev1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Bruno\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -47,7 +42,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[7.0.10, )"
+              "version": "[7.0.11, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -77,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

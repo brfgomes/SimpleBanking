@@ -115,7 +115,7 @@ namespace SimpleBanking.Infra.Database
             {
                 _databaseConnection.Open();   
 
-                var sql = "SELECT * FROM users WHERE id = @Id";
+                var sql = "SELECT * FROM users WHERE id = UNHEX(@Id);";
                 var parameters = new Dictionary<string, object>{
                     {"@Id", id}
                 };
@@ -131,7 +131,13 @@ namespace SimpleBanking.Infra.Database
                         (EUserType)dbUsers["type"]
                     );
 
-                    user.SetId((Guid)dbUsers["id"]);
+                    string formattedGuidString = id.Insert(8, "-").Insert(13, "-").Insert(18, "-").Insert(23, "-");
+
+                    Guid guidId = new Guid(formattedGuidString);
+
+                    user.SetId(guidId);
+
+
                 }
                 return user!;
             }

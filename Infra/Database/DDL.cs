@@ -36,8 +36,8 @@ namespace SimpleBanking.Infra.Database
             CREATE TABLE IF NOT EXISTS transactions(
             id uuid NOT NULL,
             value decimal NOT NULL,
-            sender varchar NOT NULL,
-            receiver varchar NOT NULL
+            sender uuid NOT NULL,
+            receiver uuid NOT NULL
             );
             """;
             databaseConnection.Command(sql);

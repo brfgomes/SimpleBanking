@@ -19,20 +19,25 @@ namespace SimpleBanking.Infra.Database.Repositories
             {
                 _databaseConnection.Open();
 
-                var sql = "SELECT * FROM wallets WHERE userid = @UserId";
+                var sql = "SELECT * FROM wallets WHERE userid = UNHEX(@UserId)";
                 var parameters = new Dictionary<string, object>{
-                    {"@UserId", userId}
+                    {"@UserId", userId.ToString().Replace("-", "")}
                 };
                 var dbWallets = _databaseConnection.Query(sql, parameters);
                 Wallet wallet = null;
                 while (dbWallets.Read())
                 {
                     wallet = new Wallet(
-                        (decimal)dbWallets["balnace"]
+                        (decimal)dbWallets["balance"]
                     );
 
-                    wallet.SetId((Guid)dbWallets["userid"]);
-                    wallet.SetLastTransactionDate((DateTime)dbWallets["lasttransactiondate"]);
+                    wallet.SetId(userId);
+                    var lastTransactionDateDB = dbWallets["lasttransactiondate"].ToString();
+                    if (lastTransactionDateDB != "")
+                    {
+                        wallet.SetLastTransactionDate((DateTime)dbWallets["lasttransactiondate"]);
+                    }
+
                 }
                 return wallet!;
             }
@@ -66,6 +71,29 @@ namespace SimpleBanking.Infra.Database.Repositories
             finally
             {
                 _databaseConnection.Close();   
+            }
+        }
+
+        public void UpadateBalance(Guid userId, decimal balance)
+        {
+            var sql = "UPDATE wallets SET balance= @Balance, lasttransactiondate= CURRENT_TIMESTAMP WHERE userid= UNHEX(@UserId);";
+            var parameters = new Dictionary<string, object>
+            {
+                { "@UserId", userId.ToString().Replace("-", "") },
+                { "@Balance", balance }
+            };
+            try
+            {
+                _databaseConnection.Open();
+                _databaseConnection.Command(sql, parameters);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _databaseConnection.Close();
             }
         }
     }

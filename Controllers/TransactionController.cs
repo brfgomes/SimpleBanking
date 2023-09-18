@@ -11,16 +11,11 @@ namespace SimpleBanking.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IWalletRepository _walletRepository;
         private readonly ITransactionRepository _transactionRepository;
-        
         private readonly ILogger<TransactionController> _logger;
 
-        public TransactionController( ILogger<TransactionController> logger)
+        public TransactionController(ILogger<TransactionController> logger, IUserRepository userRepository, IWalletRepository walletRepository, ITransactionRepository transactionRepository)
         {
             _logger = logger;
-        }
-
-        public TransactionController(IUserRepository userRepository, IWalletRepository walletRepository, ITransactionRepository transactionRepository)
-        {
             _userRepository = userRepository;
             _walletRepository = walletRepository;
             _transactionRepository = transactionRepository;
