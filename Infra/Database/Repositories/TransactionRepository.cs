@@ -20,7 +20,7 @@ namespace SimpleBanking.Infra.Database
 
         public bool Insert(Transaction transaction)
         {
-            var sql = " INSERT INTO transactions (id, value, sender, receiver) VALUES (@Id, @Value, @Sender, @Receiver);";
+            var sql = " INSERT INTO transactions (id, value, sender, receiver, date) VALUES (@Id, @Value, @Sender, @Receiver, CURRENT_TIMESTAMP);";
             var parameters = new Dictionary<string, object>
             {
                 {"@Id", transaction.Id},

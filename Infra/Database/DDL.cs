@@ -37,7 +37,8 @@ namespace SimpleBanking.Infra.Database
             id uuid NOT NULL,
             value decimal NOT NULL,
             sender uuid NOT NULL,
-            receiver uuid NOT NULL
+            receiver uuid NOT NULL,
+            date datetime NOT NULL
             );
             """;
             databaseConnection.Command(sql);

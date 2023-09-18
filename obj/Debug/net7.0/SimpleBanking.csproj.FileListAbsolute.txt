@@ -176,3 +176,4 @@ C:\Main\Dev\SimpleBanking\obj\Debug\net7.0\SimpleBanking.pdb
 C:\Main\Dev\SimpleBanking\obj\Debug\net7.0\SimpleBanking.genruntimeconfig.cache
 C:\Main\Dev\SimpleBanking\obj\Debug\net7.0\ref\SimpleBanking.dll
 C:\Main\Dev\SimpleBanking\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+D:\Dev\backend\SimpleBanking\bin\Debug\net7.0\Program.cs
