@@ -25,6 +25,7 @@ namespace SimpleBanking.Controllers
         {   
             var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
             var result = useCaseUser.Create(user);
+
             if(result.Success)
             {
                 return Ok(result.Message);
@@ -33,6 +34,39 @@ namespace SimpleBanking.Controllers
             {
                 return BadRequest(result.Message);
             }
-        }        
+        }
+
+        [HttpGet("GetAll")]
+        public ActionResult ListUsers()
+        {
+            var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
+            var result = useCaseUser.GetAll();
+
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+        }
+
+        [HttpPut("Change")]
+        public ActionResult ChangeUser([FromBody] ChangeUserRequest user)
+        {
+            var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
+
+            var result = useCaseUser.Change(user);
+
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+        }
     }
 }

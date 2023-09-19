@@ -1,8 +1,9 @@
-using SimpleBanking.Domain;
+﻿using SimpleBanking.Domain;
 
 namespace SimpleBanking.Aplication
 {
-    public record CreateUserRequest(
+    public record ChangeUserRequest(
+        string id,
         string name,
         string document,
         string email,

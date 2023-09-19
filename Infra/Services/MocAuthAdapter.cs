@@ -1,14 +1,16 @@
-﻿namespace SimpleBanking.Infra.Services;
+﻿using SimpleBanking.Infra.Services.Interfaces;
 
-public class AuthService
+namespace SimpleBanking.Infra.Services;
+
+public class MocAuthAdapter : IAuthenticationService
 {
-    public static async Task<bool> Execute()
+    public async Task<bool> Authenticate()
     {
         try
         {   
             using (HttpClient httpClient = new HttpClient())
             {
-                HttpResponseMessage response = await httpClient.GetAsync("https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6");
+                HttpResponseMessage response = await httpClient.GetAsync("https://run.mocky.io/v3/be0c6499-aaa9-4d58-88fd-f960b5989617");
 
                 if (response.IsSuccessStatusCode)
                 {

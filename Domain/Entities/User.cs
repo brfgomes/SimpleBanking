@@ -1,3 +1,8 @@
+using SimpleBanking.Domain.Exceptions;
+using Flunt.Notifications;
+using Flunt.Validations;
+using SimpleBanking.Domain.Contracts;
+
 namespace SimpleBanking.Domain
 {
     public class User : Entity
@@ -10,14 +15,7 @@ namespace SimpleBanking.Domain
             Password = password;
             Type = type;
 
-            if(name == "")
-            {
-                throw new Exception("Nome não informado");
-            }
-
-            if(name.Length < 3 || name.Length > 100)
-                throw new Exception("Nome inválido");
-
+            AddNotifications(new CreateUserContract(this));
         }
 
         public string Name { get; private set; }

@@ -1,6 +1,8 @@
 using SimpleBanking.Aplication;
 using SimpleBanking.Domain;
 using SimpleBanking.Infra.Database.Interfaces;
+using static System.Data.Entity.Infrastructure.Design.Executor;
+using System.Collections.Generic;
 
 namespace SimpleBanking.Infra.Database
 {
@@ -12,31 +14,34 @@ namespace SimpleBanking.Infra.Database
         {
             _databaseConnection = databaseConnection;
         }
-        public List<User> GetUserAll()
+        public List<User> GetAllUsers()
         {
-            return new List<User>();
-            // _databaseConnection.Open();
-            // var parameters = new Dictionary<string, object>();
-            // var sql = "SELECT * FROM users";
-            // var dbUsers = _databaseConnection.Query(sql.ToString(), parameters);
+            _databaseConnection.Open();
+            var sql = "SELECT * FROM users";
+            var dbUsers = _databaseConnection.Query(sql);
 
-            // List<User> listUsers = new List<User>();
-            // while(dbUsers.Read())
-            // {
-            //     listUsers.Add(new User(
-            //         dbUsers["name"].ToString(),
-            //         new Document(dbUsers["document"].ToString()),
-            //         new Email(dbUsers["email"].ToString()),
-            //         new Password(dbUsers["password"].ToString()),
-            //         (EUserType)dbUsers["type"],
-            //         new Wallet(dbUsers["wallet"].ToString())
-            //     ));
-            // }
-            // _databaseConnection.Close();
-            // return users;
+            List<User> listUsers = new List<User>();
+
+            while(dbUsers.Read())
+            {
+                var newUser = new User(
+                    dbUsers["name"].ToString(),
+                    new Document(dbUsers["document"].ToString()),
+                    new Email(dbUsers["email"].ToString()),
+                    new Password(dbUsers["password"].ToString()),
+                    (EUserType)dbUsers["type"]
+                );
+                var stringId = dbUsers["id"].ToString();
+                Guid guidId = new Guid(stringId);
+                newUser.SetId(guidId);
+
+                listUsers.Add(newUser);
+            }
+            _databaseConnection.Close();
+            return listUsers;
         }
 
-        public bool IfExistsUserDocument(string document)
+        public int IfExistsUserDocument(string document)
         {
             try
             {
@@ -45,19 +50,21 @@ namespace SimpleBanking.Infra.Database
                 var sql = "SELECT * FROM users WHERE document = @Document";
                 parameters.Add("@Document", document);
                 var dbUsers = _databaseConnection.Query(sql, parameters);
-                return dbUsers.HasRows;
+                var rowCount = 0;
+                while(dbUsers.Read())
+                {
+                    rowCount++;
+                }
+                _databaseConnection.Close();
+                return rowCount;
             }
             catch (System.Exception)
             {
                 throw;
             }
-            finally
-            {
-                _databaseConnection.Close();
-            }
         }
 
-        public bool IfExistsUserEmail(string email)
+        public int IfExistsUserEmail(string email)
         {
             try
             {
@@ -66,26 +73,26 @@ namespace SimpleBanking.Infra.Database
                 var sql = "SELECT * FROM users WHERE email = @Email";
                 parameters.Add("@Email", email);
                 var dbUsers = _databaseConnection.Query(sql, parameters);
-                return dbUsers.HasRows;
+                var rowCount = 0;
+                while (dbUsers.Read())
+                {
+                    rowCount++;
+                }
+                _databaseConnection.Close();
+                return rowCount;
             }
             catch (System.Exception)
             {
                 throw;
             }
-            finally
-            {
-                _databaseConnection.Close();
-            }
         }
 
         public bool Insert(User user)
         {
-            // walletRepository.Insert(user.Wallet.Id, user.Wallet.Balance);
-
             var sql = "INSERT INTO users (id, name, document, email, password, type) VALUES(@Id, @Name, @Document, @Email, @Password, @Type);";
             var parameters = new Dictionary<string, object>
             {
-                { "@Id", user.Id },
+                { "@Id", user.Id.ToString() },
                 { "@Name", user.Name },
                 { "@Document", user.Document.Code },
                 { "@Email", user.Email.Address },
@@ -96,26 +103,28 @@ namespace SimpleBanking.Infra.Database
             {
                 _databaseConnection.Open();
                 _databaseConnection.Command(sql, parameters);
+                _databaseConnection.Close();
                 return true;
             }
             catch (System.Exception)
             {
                 throw;
             }
-            finally
-            {
-                _databaseConnection.Close();
-            }
-            
         }
     
         public User GetUserById(string id)
         {
+            id = id.ToLower();
+            if(id.Contains('-') == false)
+            {
+                id = id.Insert(8, "-").Insert(13, "-").Insert(18, "-").Insert(23, "-");
+            }
+
             try
             {
                 _databaseConnection.Open();   
 
-                var sql = "SELECT * FROM users WHERE id = UNHEX(@Id);";
+                var sql = "SELECT * FROM users WHERE id = @Id";
                 var parameters = new Dictionary<string, object>{
                     {"@Id", id}
                 };
@@ -130,13 +139,8 @@ namespace SimpleBanking.Infra.Database
                         new Password(dbUsers["password"].ToString()),
                         (EUserType)dbUsers["type"]
                     );
-
-                    string formattedGuidString = id.Insert(8, "-").Insert(13, "-").Insert(18, "-").Insert(23, "-");
-
-                    Guid guidId = new Guid(formattedGuidString);
-
+                    Guid guidId = new Guid(id);
                     user.SetId(guidId);
-
 
                 }
                 return user!;
@@ -148,6 +152,32 @@ namespace SimpleBanking.Infra.Database
             finally
             {
                 _databaseConnection.Close();
+            }
+        }
+
+        public bool UpdateUser(User user)
+        {
+            var sql = "UPDATE users SET name = @Name, document = @Document, email = @Email, password = @Password, type = @Type WHERE id = @Id";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@Id", user.Id.ToString() },
+                { "@Name", user.Name },
+                { "@Document", user.Document.Code },
+                { "@Email", user.Email.Address },
+                { "@Password", user.Password.Value },
+                { "@Type", user.Type }
+            };
+            try
+            {
+                _databaseConnection.Open();
+                _databaseConnection.Command(sql, parameters);
+                _databaseConnection.Close();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                throw;
             }
         }
     }

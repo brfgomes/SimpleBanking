@@ -2,6 +2,8 @@ using SimpleBanking.Aplication;
 using SimpleBanking.Infra.Database;
 using SimpleBanking.Infra.Database.Interfaces;
 using SimpleBanking.Infra.Database.Repositories;
+using SimpleBanking.Infra.Services;
+using SimpleBanking.Infra.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ builder.Services.AddScoped<IDatabaseConnection, SQLiteAdapter>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IWalletRepository, WalletRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IAuthenticationService, MocAuthAdapter>();
+builder.Services.AddScoped <IEmailService, MocEmailAdapter>();
 
 var app = builder.Build();
 

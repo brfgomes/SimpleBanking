@@ -23,10 +23,10 @@ namespace SimpleBanking.Infra.Database
             var sql = " INSERT INTO transactions (id, value, sender, receiver, date) VALUES (@Id, @Value, @Sender, @Receiver, CURRENT_TIMESTAMP);";
             var parameters = new Dictionary<string, object>
             {
-                {"@Id", transaction.Id},
+                {"@Id", transaction.Id.ToString()},
                 {"@Value", transaction.Value},
-                {"@Sender", transaction.Sender.Id},
-                {"@Receiver", transaction.Receiver.Id},
+                {"@Sender", transaction.Sender.Id.ToString()},
+                {"@Receiver", transaction.Receiver.Id.ToString()},
             };
             try
             {

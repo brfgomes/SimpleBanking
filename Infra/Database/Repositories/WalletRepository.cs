@@ -19,9 +19,9 @@ namespace SimpleBanking.Infra.Database.Repositories
             {
                 _databaseConnection.Open();
 
-                var sql = "SELECT * FROM wallets WHERE userid = UNHEX(@UserId)";
+                var sql = "SELECT * FROM wallets WHERE userid = @UserId";
                 var parameters = new Dictionary<string, object>{
-                    {"@UserId", userId.ToString().Replace("-", "")}
+                    {"@UserId", userId.ToString()}
                 };
                 var dbWallets = _databaseConnection.Query(sql, parameters);
                 Wallet wallet = null;
@@ -56,30 +56,30 @@ namespace SimpleBanking.Infra.Database.Repositories
             var sql = "INSERT INTO wallets (userid, balance) VALUES(@UserId, @Balance);";
             var parameters = new Dictionary<string, object>
             {
-                { "@UserId", userId },
+                { "@UserId", userId.ToString() },
                 { "@Balance", balance }
             };
             try
             {
                 _databaseConnection.Open();
                 _databaseConnection.Command(sql, parameters);
+                _databaseConnection.Close();
             }
             catch (System.Exception)
             {
                 throw;
             }
             finally
-            {
-                _databaseConnection.Close();   
+            {                   
             }
         }
 
         public void UpadateBalance(Guid userId, decimal balance)
         {
-            var sql = "UPDATE wallets SET balance= @Balance, lasttransactiondate= CURRENT_TIMESTAMP WHERE userid= UNHEX(@UserId);";
+            var sql = "UPDATE wallets SET balance= @Balance, lasttransactiondate= CURRENT_TIMESTAMP WHERE userid= @UserId;";
             var parameters = new Dictionary<string, object>
             {
-                { "@UserId", userId.ToString().Replace("-", "") },
+                { "@UserId", userId.ToString() },
                 { "@Balance", balance }
             };
             try
