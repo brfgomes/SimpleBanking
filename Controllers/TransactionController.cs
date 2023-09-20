@@ -40,11 +40,11 @@ namespace SimpleBanking.Controllers
             var result = useCaseTransaction.Create(transaction);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             else
             {
-                return BadRequest(result.Message);
+                return BadRequest(result);
             }
         }
 

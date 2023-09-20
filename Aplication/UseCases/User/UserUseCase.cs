@@ -2,10 +2,12 @@ using SimpleBanking.Domain;
 using Newtonsoft.Json;
 using System.Text;
 using Flunt.Notifications;
+using SimpleBanking.Aplication.Response.User;
+using SimpleBanking.Aplication.UseCases.User;
 
 namespace SimpleBanking.Aplication
 {
-    public class UserUseCase : IUser    
+    public class UserUseCase : IUser
     {
         private readonly IUserRepository _userRepository;
         private readonly IWalletRepository _walletRepository;
@@ -16,15 +18,16 @@ namespace SimpleBanking.Aplication
             _userRepository = userRepository;
             _walletRepository = walletRepository;
         }
-        
+
         public GenericResponse Create(CreateUserRequest request)
         {
             #region Validar user e criar entidade
+
             if (_userRepository.IfExistsUserDocument(request.document) != 0)
                 return new GenericResponse(false, "Documento já existe");
 
-            if (_userRepository.IfExistsUserEmail(request.email) != 0) 
-                return new GenericResponse(false, "E-mail já existe");                
+            if (_userRepository.IfExistsUserEmail(request.email) != 0)
+                return new GenericResponse(false, "E-mail já existe");
 
 
             var newUser = new User(
@@ -32,21 +35,14 @@ namespace SimpleBanking.Aplication
                 new Document(request.document),
                 new Email(request.email),
                 new Password(request.password),
-                (EUserType)request.type
+                request.type
             );
 
-            if(!newUser.IsValid)
+            if (!newUser.IsValid)
             {
-                var notifications = new StringBuilder();
-                notifications.AppendLine("[");
-                foreach(Notification notification in newUser.Notifications)
-                {
-                    notifications.AppendLine($@"""{notification.Key}"", ");
-                }
-                notifications.AppendLine("]");
-
-                return new GenericResponse(false, notifications.ToString());
+                return new GenericResponse(false, "Usuario invalido", newUser.Notifications);
             }
+
             #endregion
 
             #region Criar user e sua carteira no banco
@@ -55,34 +51,31 @@ namespace SimpleBanking.Aplication
             _walletRepository.Insert(newUser.Id, request.wallet);
             #endregion
 
-            return new GenericResponse(true, "Usuário criado com sucesso!");
+            return new GenericResponse(true, "Usuário criado com sucesso!", new CreateUserResponse(newUser.Id));
         }
 
         public GenericResponse GetAll()
         {
             var listUsers = _userRepository.GetAllUsers();
+            List<ListUserResponse> list = new List<ListUserResponse>();
 
-            var json = new StringBuilder();
-
-            json.AppendLine("[");
             foreach (var user in listUsers)
             {
-                json.AppendLine("{");
-                json.AppendLine(@$"""id"": ""{user.Id}"",");
-                json.AppendLine(@$"""name"": ""{user.Name}"",");
-                json.AppendLine(@$"""document"": ""{user.Document.Code}"",");
-                json.AppendLine(@$"""email"": ""{user.Email.Address}"",");
-                json.AppendLine(@$"""password"": ""{user.Password.Value}"",");
-                json.AppendLine(@$"""type"": ""{user.Type}""");
-                json.AppendLine("}, ");
+                list.Add(new ListUserResponse()
+                {
+                    id = user.Id,
+                    name = user.Name,
+                    document = user.Document.Code,
+                    email = user.Email.Address,
+                    type = user.Type
+                });
             }
-            json.AppendLine("]");
+
 
             if (listUsers == null)
-            {
                 return new GenericResponse(false, "Erro ao listar usuarios");
-            }
-            return new GenericResponse(true, json.ToString());
+
+            return new GenericResponse(true, "OK", list);
         }
 
         public GenericResponse Change(ChangeUserRequest request)
@@ -94,7 +87,7 @@ namespace SimpleBanking.Aplication
                 new Document(request.document),
                 new Email(request.email),
                 new Password(request.password),
-                (EUserType)request.type
+                request.type
             );
 
             changedUser.SetId(new Guid(request.id));

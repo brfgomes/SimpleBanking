@@ -28,11 +28,11 @@ namespace SimpleBanking.Controllers
 
             if(result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             else
             {
-                return BadRequest(result.Message);
+                return BadRequest(result);
             }
         }
 
@@ -44,11 +44,11 @@ namespace SimpleBanking.Controllers
 
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             else
             {
-                return BadRequest(result.Message);
+                return BadRequest(result);
             }
         }
 
@@ -56,16 +56,15 @@ namespace SimpleBanking.Controllers
         public ActionResult ChangeUser([FromBody] ChangeUserRequest user)
         {
             var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
-
             var result = useCaseUser.Change(user);
 
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             else
             {
-                return BadRequest(result.Message);
+                return BadRequest(result);
             }
         }
     }

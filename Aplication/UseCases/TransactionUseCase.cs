@@ -1,3 +1,4 @@
+using SimpleBanking.Aplication.Response.Transaction;
 using SimpleBanking.Infra.Services;
 using SimpleBanking.Infra.Services.Interfaces;
 
@@ -99,17 +100,14 @@ namespace SimpleBanking.Aplication
             Task<GenericResponse> receiverNotificationEmail = _emailService.SendEmail(receiver.Email.Address);
 
             if (sendlerNotificationEmail.Result.Success == false)
-            {
                 return sendlerNotificationEmail.Result;
-            }
 
             if (receiverNotificationEmail.Result.Success == false)
-            {
                 return receiverNotificationEmail.Result;
-            }
+
             #endregion
 
-            return new GenericResponse(true, "Tranferencia enviada com sucesso!");
+            return new GenericResponse(true, "Tranferencia enviada com sucesso!", new TransactionResponse(newTransaction.Id));
         }
     }
 }
