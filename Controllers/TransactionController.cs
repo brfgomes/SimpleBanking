@@ -5,7 +5,7 @@ using SimpleBanking.Infra.Services.Interfaces;
 namespace SimpleBanking.Controllers
 {
     [ApiController]
-    [Route("Transaction")]
+    [Route("Transactions")]
 
     public class TransactionController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace SimpleBanking.Controllers
             _emailService = emailService;
         }
 
-        [HttpPost("Create")]
+        [HttpPost("")]
         public ActionResult CreateTransaction([FromBody] CreateTransactionRequest transaction)
         {
             var useCaseTransaction = new TransactionUseCase(_userRepository, _walletRepository, _transactionRepository, _authenticationService, _emailService);

@@ -4,7 +4,7 @@ using SimpleBanking.Aplication;
 namespace SimpleBanking.Controllers
 {
     [ApiController]
-    [Route("User")]
+    [Route("Users")]
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
@@ -20,7 +20,7 @@ namespace SimpleBanking.Controllers
             ExecuteDDL.Execute();
         }
 
-        [HttpPost("Create")]
+        [HttpPost("")]
         public ActionResult CreateUser([FromBody] CreateUserRequest user)
         {   
             var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
@@ -36,7 +36,7 @@ namespace SimpleBanking.Controllers
             }
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("")]
         public ActionResult ListUsers()
         {
             var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
@@ -52,7 +52,7 @@ namespace SimpleBanking.Controllers
             }
         }
 
-        [HttpPut("Change")]
+        [HttpPut("")]
         public ActionResult ChangeUser([FromBody] ChangeUserRequest user)
         {
             var useCaseUser = new UserUseCase(_userRepository, _walletRepository);

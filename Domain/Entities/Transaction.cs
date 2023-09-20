@@ -1,3 +1,5 @@
+using SimpleBanking.Domain.Exceptions;
+
 namespace SimpleBanking.Domain
 {
     public class Transaction : Entity
@@ -9,19 +11,12 @@ namespace SimpleBanking.Domain
             Receiver = receiver;
             Date = DateTime.Now;
 
-            if(value <= 0){
-                throw new Exception("Valor da transação não informado");
-            }
-
-            if(sender == null || receiver == null)
-            {
-                throw new Exception("Usuários não informados");
-            }
-
-            // if(value < sender.Wallet.Balance)
-            // {
-            //     throw new Exception("Saldo insuficiente");
-            // }
+            CompareValuesException.IsLowerOrEqualsThan(value, 0, "Valor da transação não informado");
+            EmptyException.Throw(sender, "Remetente não informado");
+            EmptyException.Throw(receiver, "Destinatário não informado");
+            CompareValuesException.IsEqualsThan(sender.Id, receiver.Id, "O usuário remetente não pode ser igual ao emitente");
+            CompareValuesException.IsEqualsThan(sender.Type, EUserType.Seller, "Lojistas nao podem enviar transferências!");
+            
 
         }
 

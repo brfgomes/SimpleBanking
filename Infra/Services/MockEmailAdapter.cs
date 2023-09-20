@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SimpleBanking.Infra.Services;
 
-public class MocEmailAdapter : IEmailService
+public class MockEmailAdapter : IEmailService
 {
     public async Task<GenericResponse> SendEmail(string email)
     {
@@ -20,7 +20,7 @@ public class MocEmailAdapter : IEmailService
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await httpClient.PostAsync(
-                    "https://8kw7y.wiremockapi.cloud/sendnotification", content);
+                    "https://8kw7y.wireMockapi.cloud/sendnotification", content);
 
                 var responseMessage = response.Content.ReadAsStringAsync().Result;
 

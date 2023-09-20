@@ -12,6 +12,7 @@ namespace SimpleBanking.Domain
             
             if(code == ""){
                 throw new Exception("CPF não pode ser em branco");
+                
             }
 
             if(Regex.IsMatch(noPunctuationCode, @"^\d+$") == false){

@@ -18,8 +18,8 @@ builder.Services.AddScoped<IDatabaseConnection, SQLiteAdapter>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IWalletRepository, WalletRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
-builder.Services.AddScoped<IAuthenticationService, MocAuthAdapter>();
-builder.Services.AddScoped <IEmailService, MocEmailAdapter>();
+builder.Services.AddScoped<IAuthenticationService, MockAuthAdapter>();
+builder.Services.AddScoped <IEmailService, MockEmailAdapter>();
 
 var app = builder.Build();
 

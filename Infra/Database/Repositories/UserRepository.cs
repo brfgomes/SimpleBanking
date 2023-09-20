@@ -14,6 +14,7 @@ namespace SimpleBanking.Infra.Database
         {
             _databaseConnection = databaseConnection;
         }
+        
         public List<User> GetAllUsers()
         {
             _databaseConnection.Open();
@@ -41,7 +42,7 @@ namespace SimpleBanking.Infra.Database
             return listUsers;
         }
 
-        public int IfExistsUserDocument(string document)
+        public User GetUserByDocument(string document)
         {
             try
             {
@@ -50,13 +51,21 @@ namespace SimpleBanking.Infra.Database
                 var sql = "SELECT * FROM users WHERE document = @Document";
                 parameters.Add("@Document", document);
                 var dbUsers = _databaseConnection.Query(sql, parameters);
-                var rowCount = 0;
+                User user = null;
                 while(dbUsers.Read())
                 {
-                    rowCount++;
+                    user = new User(
+                        dbUsers["name"].ToString(),
+                        new Document(dbUsers["document"].ToString()),
+                        new Email(dbUsers["email"].ToString()),
+                        new Password(dbUsers["password"].ToString()),
+                        (EUserType)dbUsers["type"]
+                    );
+                    Guid guidId = new Guid(dbUsers["id"].ToString());
+                    user.SetId(guidId);
                 }
                 _databaseConnection.Close();
-                return rowCount;
+                return user!;
             }
             catch (System.Exception)
             {
@@ -64,7 +73,7 @@ namespace SimpleBanking.Infra.Database
             }
         }
 
-        public int IfExistsUserEmail(string email)
+        public User GetUserByEmail(string email)
         {
             try
             {
@@ -73,20 +82,27 @@ namespace SimpleBanking.Infra.Database
                 var sql = "SELECT * FROM users WHERE email = @Email";
                 parameters.Add("@Email", email);
                 var dbUsers = _databaseConnection.Query(sql, parameters);
-                var rowCount = 0;
+                User user = null;
                 while (dbUsers.Read())
                 {
-                    rowCount++;
+                    user = new User(
+                        dbUsers["name"].ToString(),
+                        new Document(dbUsers["document"].ToString()),
+                        new Email(dbUsers["email"].ToString()),
+                        new Password(dbUsers["password"].ToString()),
+                        (EUserType)dbUsers["type"]
+                    );
+                    Guid guidId = new Guid(dbUsers["id"].ToString());
+                    user.SetId(guidId);
                 }
                 _databaseConnection.Close();
-                return rowCount;
+                return user!;
             }
             catch (System.Exception)
             {
                 throw;
             }
         }
-
         public bool Insert(User user)
         {
             var sql = "INSERT INTO users (id, name, document, email, password, type) VALUES(@Id, @Name, @Document, @Email, @Password, @Type);";
@@ -141,7 +157,6 @@ namespace SimpleBanking.Infra.Database
                     );
                     Guid guidId = new Guid(id);
                     user.SetId(guidId);
-
                 }
                 return user!;
             }

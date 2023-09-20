@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System.Text;
 using Flunt.Notifications;
 using SimpleBanking.Aplication.Response.User;
-using SimpleBanking.Aplication.UseCases.User;
 
 namespace SimpleBanking.Aplication
 {
@@ -23,12 +22,11 @@ namespace SimpleBanking.Aplication
         {
             #region Validar user e criar entidade
 
-            if (_userRepository.IfExistsUserDocument(request.document) != 0)
+            if (_userRepository.GetUserByDocument(request.document) != null)
                 return new GenericResponse(false, "Documento já existe");
 
-            if (_userRepository.IfExistsUserEmail(request.email) != 0)
+            if (_userRepository.GetUserByEmail(request.email)  != null)
                 return new GenericResponse(false, "E-mail já existe");
-
 
             var newUser = new User(
                 request.name,
@@ -63,17 +61,18 @@ namespace SimpleBanking.Aplication
             {
                 list.Add(new ListUserResponse()
                 {
-                    id = user.Id,
-                    name = user.Name,
-                    document = user.Document.Code,
-                    email = user.Email.Address,
-                    type = user.Type
+                    Id = user.Id,
+                    Name = user.Name,
+                    Document = user.Document.Code,
+                    Email = user.Email.Address,
+                    Type = user.Type,
+                    Wallet = _walletRepository.GetWalletByUserId(user.Id).Balance
                 });
             }
 
 
             if (listUsers == null)
-                return new GenericResponse(false, "Erro ao listar usuarios");
+                return new GenericResponse(false, "Erro ao listar usuários");
 
             return new GenericResponse(true, "OK", list);
         }
@@ -81,6 +80,20 @@ namespace SimpleBanking.Aplication
         public GenericResponse Change(ChangeUserRequest request)
         {
             #region Validar user e criar entidade
+            var existUserByDocument = _userRepository.GetUserByDocument(request.document);
+            var existUserByEmail = _userRepository.GetUserByEmail(request.email);
+
+            if(string.IsNullOrEmpty(request.id))
+                return new GenericResponse(false, "Id do usuario não informado");
+
+                if(existUserByDocument != null || existUserByEmail != null)
+                {
+                    if(request.id != existUserByDocument.Id.ToString())
+                        return new GenericResponse(false, "Já existe um usuario utilizando o mesmo documento");
+
+                    if(request.id != existUserByEmail.Id.ToString())
+                        return new GenericResponse(false, "Já existe um usuario utilizando o mesmo e-mail");
+                }
 
             var changedUser = new User(
                 request.name,
@@ -91,10 +104,11 @@ namespace SimpleBanking.Aplication
             );
 
             changedUser.SetId(new Guid(request.id));
+            
             #endregion
+            var user = _userRepository.GetUserById(request.id);
 
             _userRepository.UpdateUser(changedUser);
-            _walletRepository.UpadateBalance(changedUser.Id, request.wallet);
 
             return new GenericResponse(true, "Usuário alterado com sucesso!");
         }

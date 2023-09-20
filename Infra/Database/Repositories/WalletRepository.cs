@@ -74,7 +74,7 @@ namespace SimpleBanking.Infra.Database.Repositories
             }
         }
 
-        public void UpadateBalance(Guid userId, decimal balance)
+        public void UpdateBalance(Guid userId, decimal balance)
         {
             var sql = "UPDATE wallets SET balance= @Balance, lasttransactiondate= CURRENT_TIMESTAMP WHERE userid= @UserId;";
             var parameters = new Dictionary<string, object>

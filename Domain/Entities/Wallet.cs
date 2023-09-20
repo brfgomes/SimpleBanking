@@ -6,10 +6,8 @@ namespace SimpleBanking.Domain
         {
             Balance = balance;
 
-            if (balance <= 0)
-            {
+            if (balance < 0)
                 throw new Exception("Saldo invalido");
-            }
         }
 
         public decimal Balance { get; private set; }
