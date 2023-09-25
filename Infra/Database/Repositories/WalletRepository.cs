@@ -39,15 +39,12 @@ namespace SimpleBanking.Infra.Database.Repositories
                     }
 
                 }
+                _databaseConnection.Close();
                 return wallet!;
             }
             catch (System.Exception)
             {
                 throw;
-            }
-            finally
-            {
-                _databaseConnection.Close();
             }
         }
 
@@ -95,6 +92,34 @@ namespace SimpleBanking.Infra.Database.Repositories
             {
                 _databaseConnection.Close();
             }
+        }
+        public List<Wallet> GetAllWallets()
+        {
+            _databaseConnection.Open();
+            var sql = "SELECT * FROM wallets";
+            var dbWallets = _databaseConnection.Query(sql);
+
+            List<Wallet> wallets = new List<Wallet>();
+            while (dbWallets.Read())
+                {
+                    Wallet wallet = null;
+                    wallet = new Wallet(
+                        (decimal)dbWallets["balance"]
+                    );
+
+                    wallet.SetId(new Guid(dbWallets["userid"].ToString()));
+                    var lastTransactionDateDB = dbWallets["lasttransactiondate"].ToString();
+                    if (lastTransactionDateDB != "")
+                    {
+                        wallet.SetLastTransactionDate((DateTime)dbWallets["lasttransactiondate"]);
+                    }
+
+                    wallets.Add(wallet);
+
+                }
+            _databaseConnection.Close();
+            return wallets!;
+
         }
     }
 }

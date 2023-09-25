@@ -5,7 +5,7 @@ using SimpleBanking.Infra.Services.Interfaces;
 namespace SimpleBanking.Controllers
 {
     [ApiController]
-    [Route("Transactions")]
+    [Route("Transaction")]
 
     public class TransactionController : ControllerBase
     {

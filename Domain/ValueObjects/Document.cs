@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using SimpleBanking.Domain.Exceptions;
 
 namespace SimpleBanking.Domain
 {
@@ -6,22 +7,13 @@ namespace SimpleBanking.Domain
     {
         public Document(string code)
         {
-            Code = code;
-
             var noPunctuationCode = Regex.Replace(code, "[!\"#$%&'()*+,-./:;<=>?@\\[\\]^_`{|}~]", string.Empty);
-            
-            if(code == ""){
-                throw new Exception("CPF não pode ser em branco");
-                
-            }
 
-            if(Regex.IsMatch(noPunctuationCode, @"^\d+$") == false){
-                throw new Exception("O CPF deve conter apenas números");
-            }
+            EmptyException.Throw(code, "CPF não informado");
+            CompareValuesException.IsEqualsThan(Regex.IsMatch(noPunctuationCode, @"^\d+$"), false, "O CPF deve conter apenas números");
+            CompareValuesException.IsOtherThan(noPunctuationCode.Length, 11, "Quantidade de caracteres do CPF invalida.");
 
-            if(noPunctuationCode.Length != 11){
-                throw new Exception("CPF Invalido");
-            }
+            Code = code;
         }
 
         public string Code { get; private set; }

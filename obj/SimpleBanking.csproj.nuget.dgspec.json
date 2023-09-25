@@ -1,32 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {}
+    "c:\\Main\\Dev\\SimpleBanking\\SimpleBanking.csproj": {}
   },
   "projects": {
-    "D:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {
+    "c:\\Main\\Dev\\SimpleBanking\\SimpleBanking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
+        "projectUniqueName": "c:\\Main\\Dev\\SimpleBanking\\SimpleBanking.csproj",
         "projectName": "SimpleBanking",
-        "projectPath": "D:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
-        "packagesPath": "C:\\Users\\dev1\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\backend\\SimpleBanking\\obj\\",
+        "projectPath": "c:\\Main\\Dev\\SimpleBanking\\SimpleBanking.csproj",
+        "packagesPath": "C:\\Users\\Bruno\\.nuget\\packages\\",
+        "outputPath": "c:\\Main\\Dev\\SimpleBanking\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\dev1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Bruno\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.305\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -85,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.305\\RuntimeIdentifierGraph.json"
         }
       }
     }

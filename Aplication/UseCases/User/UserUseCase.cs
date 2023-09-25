@@ -69,8 +69,6 @@ namespace SimpleBanking.Aplication
                     Wallet = _walletRepository.GetWalletByUserId(user.Id).Balance
                 });
             }
-
-
             if (listUsers == null)
                 return new GenericResponse(false, "Erro ao listar usuários");
 

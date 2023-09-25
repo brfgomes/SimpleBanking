@@ -179,3 +179,5 @@ C:\Main\Dev\SimpleBanking\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
 D:\Dev\backend\SimpleBanking\bin\Debug\net7.0\Program.cs
 D:\Dev\backend\SimpleBanking\bin\Debug\net7.0\Newtonsoft.Json.dll
 D:\Dev\backend\SimpleBanking\bin\Debug\net7.0\Flunt.dll
+C:\Main\Dev\SimpleBanking\bin\Debug\net7.0\Flunt.dll
+C:\Main\Dev\SimpleBanking\bin\Debug\net7.0\Newtonsoft.Json.dll

@@ -48,6 +48,21 @@ namespace SimpleBanking.Domain.Exceptions
             if (value1 == value2)
                 throw new CompareValuesException(message);
         }
+        public static void IsEqualsThan(bool value1, bool value2, string message)
+        {
+            if (value1 == value2)
+                throw new CompareValuesException(message);
+        }
+        public static void IsOtherThan(string value1, string value2, string message)
+        {
+            if(value1 != value2)
+                throw new CompareValuesException(message);
+        }
+        public static void IsOtherThan(int value1, int value2, string message)
+        {
+            if(value1 != value2)
+                throw new CompareValuesException(message);
+        }
 
     }
 }

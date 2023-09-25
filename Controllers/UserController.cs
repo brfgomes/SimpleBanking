@@ -4,7 +4,7 @@ using SimpleBanking.Aplication;
 namespace SimpleBanking.Controllers
 {
     [ApiController]
-    [Route("Users")]
+    [Route("User")]
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
