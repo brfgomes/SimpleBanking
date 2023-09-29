@@ -1,7 +1,5 @@
-using SimpleBanking.Aplication.Response.Transaction;
+using SimpleBanking.Aplication.Factories;
 using SimpleBanking.Aplication.Response.User;
-using SimpleBanking.Infra.Services;
-using SimpleBanking.Infra.Services.Interfaces;
 
 namespace SimpleBanking.Aplication
 {
@@ -10,12 +8,10 @@ namespace SimpleBanking.Aplication
         private readonly IWalletRepository _walletRepository;
         private readonly IUserRepository _userRepository;
 
-        public WalletUseCase(
-            IWalletRepository walletRepository,
-            IUserRepository userRepository)
+        public WalletUseCase(IRepositoryFactory repositoryFactory)
         {
-            _walletRepository = walletRepository;
-            _userRepository = userRepository;
+            _walletRepository = repositoryFactory.CreateWalletRepository();
+            _userRepository = repositoryFactory.CreateUserRepository();
         }
 
         public GenericResponse GetAll()

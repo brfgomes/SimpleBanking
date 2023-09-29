@@ -1,6 +1,7 @@
+using SimpleBanking.Aplication.Factories;
 using SimpleBanking.Aplication.Response.Transaction;
+using SimpleBanking.Aplication.Services;
 using SimpleBanking.Infra.Services;
-using SimpleBanking.Infra.Services.Interfaces;
 
 namespace SimpleBanking.Aplication
 {
@@ -12,18 +13,13 @@ namespace SimpleBanking.Aplication
         private readonly IAuthenticationService _authenticationService;
         private readonly IEmailService _emailService;
 
-        public TransactionUseCase(
-            IUserRepository userRepository,
-            IWalletRepository walletRepository,
-            ITransactionRepository transactionRepository,
-            IAuthenticationService authenticationService,
-            IEmailService emailService)
+        public TransactionUseCase(IRepositoryFactory repositoryFactory, IServicesFactory servicesFactory)
         {
-            _userRepository = userRepository;
-            _walletRepository = walletRepository;
-            _transactionRepository = transactionRepository;
-            _authenticationService = authenticationService;
-            _emailService = emailService;
+            _userRepository = repositoryFactory.CreateUserRepository();
+            _walletRepository = repositoryFactory.CreateWalletRepository();
+            _transactionRepository = repositoryFactory.CreateTransactionRepository();
+            _authenticationService = servicesFactory.CreateAuthenticationService();
+            _emailService = servicesFactory.CreateEmailService();
         }
 
         public GenericResponse Create(CreateTransactionRequest transaction)

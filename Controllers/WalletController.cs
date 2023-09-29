@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleBanking.Aplication;
+using SimpleBanking.Aplication.Factories;
+using SimpleBanking.Domain;
 
 namespace SimpleBanking.Controllers
 {
@@ -8,14 +10,12 @@ namespace SimpleBanking.Controllers
     public class WalletController : ControllerBase
     {
         private readonly ILogger<WalletController> _logger;
-        private readonly IUserRepository _userRepository;
-        private readonly IWalletRepository _walletRepository;
+        private readonly IWallet _wallet;
 
-        public WalletController(ILogger<WalletController> logger, IUserRepository userRepository, IWalletRepository walletRepository)
+        public WalletController(ILogger<WalletController> logger, IWallet wallet)
         {
             _logger = logger;
-            _userRepository = userRepository;
-            _walletRepository = walletRepository; 
+            _wallet = wallet;
 
             ExecuteDDL.Execute();
         }
@@ -23,8 +23,7 @@ namespace SimpleBanking.Controllers
         [HttpGet("")]
         public ActionResult ListUsers()
         {
-            var walletCaseUser = new WalletUseCase(_walletRepository, _userRepository);
-            var result = walletCaseUser.GetAll();
+            var result = _wallet.GetAll();
 
             if (result.Success)
             {

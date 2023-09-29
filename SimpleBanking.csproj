@@ -18,6 +18,8 @@
     <Compile Update="Program.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Remove="Infra\Factories\DatabaseFactory.cs" />
+    <Compile Remove="Aplication\Factories\IUseCasesFactory.cs" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-using SimpleBanking.Infra.Database.Interfaces;
+using SimpleBanking.Aplication.Database;
 
 namespace SimpleBanking.Infra.Database
 {

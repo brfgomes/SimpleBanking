@@ -1,6 +1,6 @@
 using SimpleBanking.Aplication;
+using SimpleBanking.Aplication.Database;
 using SimpleBanking.Domain;
-using SimpleBanking.Infra.Database.Interfaces;
 
 namespace SimpleBanking.Infra.Database.Repositories
 {

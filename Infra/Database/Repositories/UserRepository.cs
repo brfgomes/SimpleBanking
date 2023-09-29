@@ -1,8 +1,8 @@
 using SimpleBanking.Aplication;
 using SimpleBanking.Domain;
-using SimpleBanking.Infra.Database.Interfaces;
 using static System.Data.Entity.Infrastructure.Design.Executor;
 using System.Collections.Generic;
+using SimpleBanking.Aplication.Database;
 
 namespace SimpleBanking.Infra.Database
 {

@@ -1,7 +1,7 @@
 using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
-using SimpleBanking.Infra.Database.Interfaces;
+using SimpleBanking.Aplication.Database;
 
 namespace SimpleBanking.Infra.Database
 {

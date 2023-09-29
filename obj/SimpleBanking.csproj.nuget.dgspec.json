@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {}
+    "D:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {}
   },
   "projects": {
-    "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {
+    "D:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
+        "projectUniqueName": "D:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
         "projectName": "SimpleBanking",
-        "projectPath": "d:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
+        "projectPath": "D:\\Dev\\backend\\SimpleBanking\\SimpleBanking.csproj",
         "packagesPath": "C:\\Users\\dev1\\.nuget\\packages\\",
-        "outputPath": "d:\\Dev\\backend\\SimpleBanking\\obj\\",
+        "outputPath": "D:\\Dev\\backend\\SimpleBanking\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

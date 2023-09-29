@@ -1,9 +1,11 @@
 using SimpleBanking.Aplication;
+using SimpleBanking.Aplication.Database;
+using SimpleBanking.Aplication.Factories;
+using SimpleBanking.Aplication.Services;
 using SimpleBanking.Infra.Database;
-using SimpleBanking.Infra.Database.Interfaces;
 using SimpleBanking.Infra.Database.Repositories;
+using SimpleBanking.Infra.Factories;
 using SimpleBanking.Infra.Services;
-using SimpleBanking.Infra.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +17,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IDatabaseConnection, SQLiteAdapter>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IWalletRepository, WalletRepository>();
-builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
-builder.Services.AddScoped<IAuthenticationService, MockAuthAdapter>();
-builder.Services.AddScoped <IEmailService, MockEmailAdapter>();
+builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
+builder.Services.AddScoped<IServicesFactory, ServicesFactory>();
+builder.Services.AddScoped<IUser, UserUseCase>();
+builder.Services.AddScoped<ITransaction, TransactionUseCase>();
+builder.Services.AddScoped<IWallet, WalletUseCase>();
 
 var app = builder.Build();
 

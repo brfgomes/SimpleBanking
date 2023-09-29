@@ -5,10 +5,10 @@ namespace SimpleBanking.Aplication
 {
     public interface IUser
     {
-        public GenericResponse Create(CreateUserRequest user);
+        GenericResponse Create(CreateUserRequest user);
 
-        public GenericResponse GetAll();
+        GenericResponse GetAll();
 
-        public GenericResponse Change(ChangeUserRequest request);
+        GenericResponse Change(ChangeUserRequest request);
     }
 }

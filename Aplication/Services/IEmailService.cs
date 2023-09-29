@@ -1,6 +1,4 @@
-﻿using SimpleBanking.Aplication;
-
-namespace SimpleBanking.Infra.Services.Interfaces
+﻿namespace SimpleBanking.Aplication.Services
 {
     public interface IEmailService
     {
