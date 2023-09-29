@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleBanking.Aplication;
+using SimpleBanking.Aplication.Factories;
 
 namespace SimpleBanking.Controllers
 {
@@ -8,14 +9,12 @@ namespace SimpleBanking.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly IUserRepository _userRepository;
-        private readonly IWalletRepository _walletRepository;
+        private readonly IRepositoryFactory _repositoryFactory;
 
-        public UserController(ILogger<UserController> logger, IUserRepository userRepository, IWalletRepository walletRepository)
+        public UserController(ILogger<UserController> logger,IRepositoryFactory repositoryFactory)
         {
             _logger = logger;
-            _userRepository = userRepository;
-            _walletRepository = walletRepository; 
+            _repositoryFactory = repositoryFactory;
 
             ExecuteDDL.Execute();
         }
@@ -23,7 +22,7 @@ namespace SimpleBanking.Controllers
         [HttpPost("")]
         public ActionResult CreateUser([FromBody] CreateUserRequest user)
         {   
-            var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
+            var useCaseUser = new UserUseCase(_repositoryFactory);
             var result = useCaseUser.Create(user);
 
             if(result.Success)
@@ -39,7 +38,7 @@ namespace SimpleBanking.Controllers
         [HttpGet("")]
         public ActionResult ListUsers()
         {
-            var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
+            var useCaseUser = new UserUseCase(_repositoryFactory);
             var result = useCaseUser.GetAll();
 
             if (result.Success)
@@ -55,7 +54,7 @@ namespace SimpleBanking.Controllers
         [HttpPut("")]
         public ActionResult ChangeUser([FromBody] ChangeUserRequest user)
         {
-            var useCaseUser = new UserUseCase(_userRepository, _walletRepository);
+            var useCaseUser = new UserUseCase(_repositoryFactory);
             var result = useCaseUser.Change(user);
 
             if (result.Success)

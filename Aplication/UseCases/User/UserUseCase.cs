@@ -1,7 +1,5 @@
+using SimpleBanking.Aplication.Factories;
 using SimpleBanking.Domain;
-using Newtonsoft.Json;
-using System.Text;
-using Flunt.Notifications;
 using SimpleBanking.Aplication.Response.User;
 
 namespace SimpleBanking.Aplication
@@ -12,10 +10,10 @@ namespace SimpleBanking.Aplication
         private readonly IWalletRepository _walletRepository;
 
 
-        public UserUseCase(IUserRepository userRepository, IWalletRepository walletRepository)
+        public UserUseCase(IRepositoryFactory repositoryFactory)
         {
-            _userRepository = userRepository;
-            _walletRepository = walletRepository;
+            _userRepository = repositoryFactory.CreateUserRepository();
+            _walletRepository = repositoryFactory.CreateWalletRepository();
         }
 
         public GenericResponse Create(CreateUserRequest request)

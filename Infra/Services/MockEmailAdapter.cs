@@ -1,6 +1,6 @@
 ﻿using SimpleBanking.Aplication;
-using SimpleBanking.Infra.Services.Interfaces;
 using System.Text;
+using SimpleBanking.Aplication.Services;
 
 namespace SimpleBanking.Infra.Services;
 

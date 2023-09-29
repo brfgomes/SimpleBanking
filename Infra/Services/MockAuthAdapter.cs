@@ -1,4 +1,4 @@
-﻿using SimpleBanking.Infra.Services.Interfaces;
+﻿using SimpleBanking.Aplication.Services;
 
 namespace SimpleBanking.Infra.Services;
 
