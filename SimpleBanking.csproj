@@ -10,6 +10,7 @@
     <PackageReference Include="flunt" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Npgsql" Version="8.0.0-preview.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
   </ItemGroup>
@@ -20,6 +21,19 @@
     </Compile>
     <Compile Remove="Infra\Factories\DatabaseFactory.cs" />
     <Compile Remove="Aplication\Factories\IUseCasesFactory.cs" />
+    <Compile Remove="Aplication\UseCases\DDL\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Aplication\UseCases\DDL\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Aplication\UseCases\DDL\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Aplication\UseCases\DDL\**" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,6 @@
 using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
-using SimpleBanking.Aplication.Database;
 
 namespace SimpleBanking.Infra.Database
 {
@@ -10,8 +9,8 @@ namespace SimpleBanking.Infra.Database
         public SQLiteAdapter()
         {
             var path = $"{ AppDomain.CurrentDomain.BaseDirectory}/database.db";
-            var ConnectionString = $"Data Source={path};Version=3;";
-            _connection = new SQLiteConnection(ConnectionString);
+            var connectionString = $"Data Source={path};Version=3;";
+            _connection = new SQLiteConnection(connectionString);
         }
         
         private readonly SQLiteConnection _connection;

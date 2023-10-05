@@ -1,5 +1,4 @@
 ﻿using SimpleBanking.Aplication;
-using SimpleBanking.Aplication.Database;
 using SimpleBanking.Aplication.Factories;
 using SimpleBanking.Infra.Database;
 using SimpleBanking.Infra.Database.Repositories;

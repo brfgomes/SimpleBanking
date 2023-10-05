@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleBanking.Aplication;
-using SimpleBanking.Aplication.Factories;
 
 namespace SimpleBanking.Controllers
 {
@@ -11,12 +10,12 @@ namespace SimpleBanking.Controllers
         private readonly ILogger<UserController> _logger;
         private readonly IUser _user;
 
-        public UserController(ILogger<UserController> logger, IUser user)
+        public UserController(ILogger<UserController> logger, IUser user, IDDL executeDDl)
         {
             _logger = logger;
             _user = user;
-
-            ExecuteDDL.Execute();
+            
+            executeDDl.Execute();
         }
 
         [HttpPost("")]

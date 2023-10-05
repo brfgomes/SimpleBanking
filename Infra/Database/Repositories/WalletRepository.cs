@@ -1,5 +1,4 @@
 using SimpleBanking.Aplication;
-using SimpleBanking.Aplication.Database;
 using SimpleBanking.Domain;
 
 namespace SimpleBanking.Infra.Database.Repositories

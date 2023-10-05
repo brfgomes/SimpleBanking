@@ -13,10 +13,12 @@ namespace SimpleBanking.Controllers
         private readonly ILogger<TransactionController> _logger;
         private readonly ITransaction _transaction;
 
-        public TransactionController(ILogger<TransactionController> logger, ITransaction transaction)
+        public TransactionController(ILogger<TransactionController> logger, ITransaction transaction, IDDL executeDDl)
         {
             _logger = logger;
             _transaction = transaction;
+            
+            executeDDl.Execute();
         }
 
         [HttpPost("")]

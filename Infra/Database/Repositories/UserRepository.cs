@@ -1,8 +1,5 @@
 using SimpleBanking.Aplication;
 using SimpleBanking.Domain;
-using static System.Data.Entity.Infrastructure.Design.Executor;
-using System.Collections.Generic;
-using SimpleBanking.Aplication.Database;
 
 namespace SimpleBanking.Infra.Database
 {
@@ -113,7 +110,7 @@ namespace SimpleBanking.Infra.Database
                 { "@Document", user.Document.Code },
                 { "@Email", user.Email.Address },
                 { "@Password", user.Password.Value },
-                { "@Type", user.Type }
+                { "@Type", Convert.ToInt16(user.Type) }
             };
             try
             {
@@ -181,7 +178,7 @@ namespace SimpleBanking.Infra.Database
                 { "@Document", user.Document.Code },
                 { "@Email", user.Email.Address },
                 { "@Password", user.Password.Value },
-                { "@Type", user.Type }
+                { "@Type", Convert.ToInt16(user.Type) }
             };
             try
             {

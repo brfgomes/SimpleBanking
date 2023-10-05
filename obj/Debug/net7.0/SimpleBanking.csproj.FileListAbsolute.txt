@@ -181,3 +181,4 @@ D:\Dev\backend\SimpleBanking\bin\Debug\net7.0\Newtonsoft.Json.dll
 D:\Dev\backend\SimpleBanking\bin\Debug\net7.0\Flunt.dll
 C:\Main\Dev\SimpleBanking\bin\Debug\net7.0\Flunt.dll
 C:\Main\Dev\SimpleBanking\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\Dev\backend\SimpleBanking\bin\Debug\net7.0\Npgsql.dll

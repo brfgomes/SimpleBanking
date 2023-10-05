@@ -1,11 +1,7 @@
 using SimpleBanking.Aplication;
-using SimpleBanking.Aplication.Database;
 using SimpleBanking.Aplication.Factories;
-using SimpleBanking.Aplication.Services;
 using SimpleBanking.Infra.Database;
-using SimpleBanking.Infra.Database.Repositories;
 using SimpleBanking.Infra.Factories;
-using SimpleBanking.Infra.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,12 +12,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IDatabaseConnection, SQLiteAdapter>();
+//builder.Services.AddScoped<IDatabaseConnection, SQLiteAdapter>();
+builder.Services.AddScoped<IDatabaseConnection, PostgresSQLAdapter>();
+
 builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddScoped<IServicesFactory, ServicesFactory>();
 builder.Services.AddScoped<IUser, UserUseCase>();
 builder.Services.AddScoped<ITransaction, TransactionUseCase>();
 builder.Services.AddScoped<IWallet, WalletUseCase>();
+builder.Services.AddScoped<IDDL, DDL>();
 
 var app = builder.Build();
 

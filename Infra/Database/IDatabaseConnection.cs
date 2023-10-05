@@ -1,6 +1,6 @@
 using System.Data.Common;
 
-namespace SimpleBanking.Aplication.Database
+namespace SimpleBanking.Infra.Database
 {
     public interface IDatabaseConnection
     {
